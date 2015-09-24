@@ -1,3 +1,3 @@
-# Bindings for <errno.h>
+# Bindings for `<errno.h>`
 
-- This module is indended for use with NodeOS
+This module is indended for use with NodeOS
