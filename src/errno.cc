@@ -11,22 +11,22 @@ using namespace node;
 
 
 NAN_METHOD(GetLastErrorNumber) {
-  NanEscapableScope();
-  NanReturnValue(NanEscapeScope(NanNew<Integer>(errno)));
+  Nan::EscapableHandleScope scope;
+  info.GetReturnValue().Set(scope.Escape(Nan::New<Integer>(errno)));
 }
 
 NAN_METHOD(GetErrorString) {
-  NanEscapableScope();
-  int err = Local<Number>::Cast(args[0])->Value();
+  Nan::EscapableHandleScope scope;
+  int err = Local<Number>::Cast(info[0])->Value();
   char *errmsg = strerror(err);
-  NanReturnValue(NanEscapeScope(NanNew<String>(errmsg)));
+  info.GetReturnValue().Set(scope.Escape(Nan::New<String>(errmsg).ToLocalChecked()));
 }
 
 void init(Handle<Object> exports) {
-  exports->Set(NanNew<String>("getLastErrorNumber"),
-    NanNew<FunctionTemplate>(GetLastErrorNumber)->GetFunction());
-  exports->Set(NanNew<String>("getErrorString"),
-    NanNew<FunctionTemplate>(GetErrorString)->GetFunction());
+  exports->Set(Nan::New<String>("getLastErrorNumber").ToLocalChecked(),
+    Nan::New<FunctionTemplate>(GetLastErrorNumber)->GetFunction());
+  exports->Set(Nan::New<String>("getErrorString").ToLocalChecked(),
+    Nan::New<FunctionTemplate>(GetErrorString)->GetFunction());
 }
 
 NODE_MODULE(binding, init)
