@@ -5,7 +5,7 @@
   "author": "Jacob Groundwater <groundwater@gmail.com>",
   "license": "MIT",
   "main": "errno.js",
-  "dependencies" : {
-    "nan": "^1.9.0"
+  "dependencies": {
+    "nan": "^2.0.9"
   }
 }
